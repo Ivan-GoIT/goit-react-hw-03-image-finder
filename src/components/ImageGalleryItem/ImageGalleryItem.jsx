@@ -7,12 +7,12 @@ export const ImageGalleryItem = ({
   largeImageURL,
 }) => {
   return (
-    <div className={css['photo-card']}>
+    <li className={css['photo-card']}>
         <img
           src={largeImageURL}
           alt={tags}
           className="lazy"
         />
-    </div>
+    </li>
   );
 };
