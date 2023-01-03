@@ -1,8 +1,9 @@
 import { Component } from 'react';
-import { Header } from './Header/Header';
-import { ImgContainer } from './ImgContainer/ImgContainer';
+import { Searchbar } from './Searchbar/Searchbar';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 import data from './assets/data.json';
 import { Section } from './Section/Section';
+import { Button } from './Button/Button';
 
 export class App extends Component {
   state = {
@@ -16,9 +17,13 @@ export class App extends Component {
   render() {
     return (
       <>
-        <Header onSubmit={this.formSubmit} />
+        <Searchbar onSubmit={this.formSubmit} />
         <Section>
-          <ImgContainer fetchedImg={data} />
+          <ImageGallery fetchedImg={data} />
+        </Section>
+        <Section>
+        <Button />
+
         </Section>
       </>
     );
