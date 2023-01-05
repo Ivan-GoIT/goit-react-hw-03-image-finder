@@ -1,6 +1,7 @@
 import css from './Searchbar.module.css';
 import { ImSearch } from 'react-icons/im';
 import { Component } from 'react';
+import { toast } from 'react-toastify';
 
 export class Searchbar extends Component {
   state = {
@@ -12,8 +13,13 @@ export class Searchbar extends Component {
   };
 
   onSubmitFormHandler = evt => {
+    const{formSearchQuery}=this.state
     evt.preventDefault();
-    this.props.onSubmit(this.state.formSearchQuery);
+    if (!formSearchQuery.length) {
+      toast.warning('enter something in the search bar');
+      return;
+    }
+    this.props.onSubmit(formSearchQuery);
   };
 
   render() {
@@ -37,7 +43,6 @@ export class Searchbar extends Component {
           />
         </form>
       </header>
-
     );
   }
 }
