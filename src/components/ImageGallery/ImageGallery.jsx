@@ -22,7 +22,7 @@ export class ImageGallery extends Component {
     imgData: [],
     page: 1,
     error: {},
-    status: STATUS.idle, //idle,pending,success,rejected
+    status: STATUS.idle,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -30,6 +30,7 @@ export class ImageGallery extends Component {
     const { searchQuery: prevQuery } = prevProps;
     const { page } = this.state;
     const { page: prevPage } = prevState;
+
     if (searchQuery !== prevQuery) {
       this.setState({ page: 1, imgData: [] });
     }
@@ -79,18 +80,19 @@ export class ImageGallery extends Component {
     status === STATUS.rejected && toast[action](message);
 
     const { imgData } = this.state;
-    // if (!imgData.length) return;
     return (
       <Section className="gallery">
-        <ul className={css.container}>
-          {imgData.map(imgItem => (
-            <ImageGalleryItem key={imgItem.id} {...imgItem} />
-          ))}
-        </ul>
-        {status === STATUS.pending && <Loader />}
-        {status === STATUS.success && (
-          <Button onClick={this.buttonClickHandler} />
-        )}
+        <>
+          <ul className={css.container}>
+            {imgData.map(imgItem => (
+              <ImageGalleryItem key={imgItem.id} {...imgItem} />
+            ))}
+          </ul>
+          {status === STATUS.pending && <Loader />}
+          {status === STATUS.success && (
+            <Button onClick={this.buttonClickHandler} />
+          )}
+        </>
       </Section>
     );
   }
