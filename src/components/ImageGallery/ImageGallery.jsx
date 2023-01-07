@@ -39,6 +39,7 @@ export class ImageGallery extends Component {
     }
   }
 
+
   fetchData = async () => {
     this.setState({ status: STATUS.pending });
     const { searchQuery } = this.props;

@@ -13,8 +13,8 @@ export class Searchbar extends Component {
   };
 
   onSubmitFormHandler = evt => {
-    const{formSearchQuery}=this.state
     evt.preventDefault();
+    const{formSearchQuery}=this.state
     if (!formSearchQuery.length) {
       toast.warning('enter something in the search bar');
       return;

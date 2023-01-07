@@ -11,12 +11,13 @@ export class App extends Component {
     searchQuery: '',
   };
 
+
   formSubmit = searchQuery => {
     this.setState({ searchQuery });
   };
 
   render() {
-    const { searchQuery } = this.state;
+    const { searchQuery, } = this.state;
 
     return (
       <>
