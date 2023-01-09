@@ -8,26 +8,14 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 export class ImageGalleryItem extends Component {
   state = {
     showModal: false,
-    tmpModal:false,
   };
 
-  shouldComponentUpdate({ id: nextId }) {
-    const { id } = this.props;
-    return !(nextId === id);
-  }
 
   toggleModal = () => {
-    console.log('Bingo');
     this.setState(({ showModal }) => ({
       showModal: !showModal,
     }));
   };
-
-  tmpModalChanger=()=>{//для пробы отработки открытия модалки
-    console.log('tmpModalChanger');
-    this.setState({tmpModal:true,})
-  }
-
 
 
   render() {
@@ -35,7 +23,7 @@ export class ImageGalleryItem extends Component {
     const { showModal,tmpModal } = this.state;
     return (
       <>
-        <li className={css['photo-card']} onClick={this.tmpModalChanger}>
+        <li className={css['photo-card']} onClick={this.toggleModal}>
           <LazyLoadImage
             src={webformatURL}
             alt={tags}
@@ -44,17 +32,17 @@ export class ImageGalleryItem extends Component {
             className={css['fetched-image']}
           />
         </li>
-        {tmpModal && (
-          <Modal onClose={this.toggleModal}>
+        {showModal && (
+          <Modal 
+          onClose={this.toggleModal}
+          >
             <LazyLoadImage
-              src={largeImageURL}
-              alt={tags}
-              placeholderSrc={webformatURL}
-            />
+            src={largeImageURL}
+            alt={tags}
+            placeholderSrc={webformatURL}
+          />
           </Modal>
         )}
-        {<p>tmpModal {tmpModal}</p>}
-        {<p>showModal {showModal}</p>}
       </>
     );
   }
