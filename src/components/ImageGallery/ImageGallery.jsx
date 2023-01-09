@@ -21,6 +21,7 @@ export class ImageGallery extends Component {
   state = {
     imgData: [],
     page: 1,
+    per_page: 12,
     status: STATUS.idle,
   };
 
@@ -41,9 +42,9 @@ export class ImageGallery extends Component {
   fetchData = async () => {
     this.setState({ status: STATUS.pending });
     const { searchQuery } = this.props;
-    const { page } = this.state;
+    const { page, per_page } = this.state;
     try {
-      const requestData = await fetchPichureData(searchQuery, page);
+      const requestData = await fetchPichureData(searchQuery, page, per_page);
       if (requestData.data.total === 0) {
         this.setState({
           status: STATUS.rejected,
@@ -68,7 +69,7 @@ export class ImageGallery extends Component {
   };
 
   render() {
-    const { status,imgData } = this.state;
+    const { status, imgData,per_page } = this.state;
 
     return (
       <Section className="gallery">
@@ -79,8 +80,8 @@ export class ImageGallery extends Component {
             ))}
           </ul>
           {status === STATUS.pending && <Loader />}
-          {status === STATUS.success && (
-            <Button onClick={this.buttonClickHandler} />
+          {status === STATUS.success && !(imgData.length<per_page)&&
+            (<Button onClick={this.buttonClickHandler} />
           )}
         </>
       </Section>
