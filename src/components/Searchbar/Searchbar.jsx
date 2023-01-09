@@ -16,7 +16,7 @@ export class Searchbar extends Component {
     evt.preventDefault();
     const{formSearchQuery}=this.state
     if (!formSearchQuery.length) {
-      toast.warning('enter something in the search bar');
+      toast.warning('Enter something in the search bar');
       return;
     }
     this.props.onSubmit(formSearchQuery);

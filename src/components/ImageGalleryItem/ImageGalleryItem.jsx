@@ -20,7 +20,7 @@ export class ImageGalleryItem extends Component {
 
   render() {
     const { webformatURL, tags, previewURL, largeImageURL } = this.props;
-    const { showModal,tmpModal } = this.state;
+    const { showModal } = this.state;
     return (
       <>
         <li className={css['photo-card']} onClick={this.toggleModal}>

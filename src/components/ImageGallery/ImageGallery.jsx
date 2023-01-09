@@ -21,7 +21,6 @@ export class ImageGallery extends Component {
   state = {
     imgData: [],
     page: 1,
-    error: {},
     status: STATUS.idle,
   };
 
@@ -39,7 +38,6 @@ export class ImageGallery extends Component {
     }
   }
 
-
   fetchData = async () => {
     this.setState({ status: STATUS.pending });
     const { searchQuery } = this.props;
@@ -49,11 +47,8 @@ export class ImageGallery extends Component {
       if (requestData.data.total === 0) {
         this.setState({
           status: STATUS.rejected,
-          error: {
-            message: 'No images matching your request',
-            action: 'error',
-          },
         });
+        toast.error('No images matching your request');
         return;
       }
       this.setState(({ imgData: prevData }) => ({
@@ -62,9 +57,9 @@ export class ImageGallery extends Component {
       }));
     } catch (error) {
       this.setState({
-        error: { message: 'Something wrong', action: 'error' },
         status: STATUS.rejected,
       });
+      toast.error('No images matching your request');
     }
   };
 
@@ -73,14 +68,8 @@ export class ImageGallery extends Component {
   };
 
   render() {
-    const {
-      error: { message, action },
-      status,
-    } = this.state;
+    const { status,imgData } = this.state;
 
-    status === STATUS.rejected && toast[action](message);
-
-    const { imgData } = this.state;
     return (
       <Section className="gallery">
         <>
