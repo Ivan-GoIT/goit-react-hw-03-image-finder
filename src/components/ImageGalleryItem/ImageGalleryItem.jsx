@@ -8,6 +8,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 export class ImageGalleryItem extends Component {
   state = {
     showModal: false,
+    tmpModal:false,
   };
 
   shouldComponentUpdate({ id: nextId }) {
@@ -22,12 +23,19 @@ export class ImageGalleryItem extends Component {
     }));
   };
 
+  tmpModalChanger=()=>{
+    console.log('tmpModalChanger');
+    this.setState({tmpModal:true,})
+  }
+
+
+
   render() {
     const { webformatURL, tags, previewURL, largeImageURL } = this.props;
-    const { showModal } = this.state;
+    const { showModal,tmpModal } = this.state;
     return (
       <>
-        <li className={css['photo-card']} onClick={this.toggleModal}>
+        <li className={css['photo-card']} onClick={this.tmpModalChanger}>
           <LazyLoadImage
             src={webformatURL}
             alt={tags}
@@ -36,7 +44,7 @@ export class ImageGalleryItem extends Component {
             className={css['fetched-image']}
           />
         </li>
-        {showModal && (
+        {tmpModal && (
           <Modal onClose={this.toggleModal}>
             <LazyLoadImage
               src={largeImageURL}
