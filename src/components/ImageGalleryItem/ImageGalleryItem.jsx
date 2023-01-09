@@ -23,7 +23,7 @@ export class ImageGalleryItem extends Component {
     }));
   };
 
-  tmpModalChanger=()=>{
+  tmpModalChanger=()=>{//для пробы отработки открытия модалки
     console.log('tmpModalChanger');
     this.setState({tmpModal:true,})
   }
@@ -53,6 +53,8 @@ export class ImageGalleryItem extends Component {
             />
           </Modal>
         )}
+        {<p>tmpModal {tmpModal}</p>}
+        {<p>showModal {showModal}</p>}
       </>
     );
   }
